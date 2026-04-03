@@ -106,6 +106,24 @@ Add these to a specific repo's `.claude/settings.json`. See [examples.json](exam
 }
 ```
 
+## Per-project templates
+
+Ready-to-copy `.claude/settings.json` files for common project types in [templates/](templates/):
+
+| Template | Tools | File |
+|----------|-------|------|
+| JavaScript/TypeScript | ESLint + Prettier | [`javascript.json`](templates/javascript.json) |
+| Python | ruff (lint + format) | [`python.json`](templates/python.json) |
+| Go | gofmt + go vet | [`go.json`](templates/go.json) |
+| Rust | cargo fmt + clippy | [`rust.json`](templates/rust.json) |
+
+To use: copy the template into your project root as `.claude/settings.json`:
+
+```bash
+mkdir -p .claude
+cp /path/to/coding-agents-config/claude/hooks/templates/python.json .claude/settings.json
+```
+
 ## Environment variables available in hooks
 
 | Variable | Description |

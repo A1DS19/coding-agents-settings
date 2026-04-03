@@ -1,0 +1,15 @@
+{
+  "_comment": "Per-project hooks for Go projects. Copy this file to .claude/settings.json in your repo.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.go$'; then gofmt -w $CLAUDE_FILE_PATH 2>&1 || true; fi"
+      },
+      {
+        "matcher": "Write",
+        "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.go$'; then go vet ./... 2>&1 || true; fi"
+      }
+    ]
+  }
+}

@@ -24,8 +24,15 @@ This copies everything from `claude/` into your local `~/.claude/` directory. Th
 ### Codex
 
 ```bash
-# Sync skills from ~/.codex/ into the repo (backup direction)
-./codex/scripts/sync_skills.sh
+# Install skills into ~/.codex/
+./codex/scripts/install.sh
+```
+
+### Export (capture local changes back into repo)
+
+```bash
+./claude/scripts/export.sh    # Claude: agents, settings, CLAUDE.md
+./codex/scripts/export.sh     # Codex: skills
 ```
 
 ## What's configured
@@ -35,7 +42,7 @@ This copies everything from `claude/` into your local `~/.claude/` directory. Th
 | Feature | Description | Docs |
 |---------|-------------|------|
 | **Agents** | 12 task-specific agents (code review, debug, testing, security audit, etc.) | [claude/agents/](claude/agents/README.md) |
-| **Hooks** | Global safety guardrails — block main commits, force push, secret leaks; test reminders | [claude/hooks/](claude/hooks/README.md) |
+| **Hooks** | Global safety guardrails + per-project templates (JS, Python, Go, Rust) | [claude/hooks/](claude/hooks/README.md) |
 | **Settings** | Model selection, tool permissions, MCP servers, environment variables | [claude/settings/](claude/settings/README.md) |
 | **CLAUDE.md** | Global instructions (plan-first workflow, code quality rules, git conventions) | [claude/claude-md/](claude/claude-md/README.md) |
 
@@ -54,13 +61,14 @@ This copies everything from `claude/` into your local `~/.claude/` directory. Th
 .
 ├── claude/
 │   ├── agents/          # 12 custom agent prompts
-│   ├── hooks/           # Hook reference + examples (global & per-project)
+│   ├── hooks/           # Hook reference, examples, and per-project templates
+│   │   └── templates/   # Ready-to-copy .claude/settings.json (JS, Python, Go, Rust)
 │   ├── settings/        # settings.json schema + canonical config
 │   ├── claude-md/       # CLAUDE.md templates (global + per-project)
-│   └── scripts/         # install.sh
+│   └── scripts/         # install.sh + export.sh
 ├── codex/
 │   ├── skills/          # Mirrored Codex skills
-│   ├── scripts/         # sync + bootstrap scripts
+│   ├── scripts/         # install.sh, export.sh, bootstrap.sh
 │   ├── templates/       # Prompt templates
 │   └── *.md             # System, workflows, tools, style, testing, security
 └── gemini/

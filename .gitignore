@@ -8,5 +8,7 @@ Thumbs.db
 *.log
 *.tmp
 
-# Optional local-only overrides
+# Optional local-only overrides (e.g., settings.local.json with real tokens)
 *.local
+*.local.json
+*.local.toml

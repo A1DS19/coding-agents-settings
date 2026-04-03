@@ -1,0 +1,15 @@
+{
+  "_comment": "Per-project hooks for Rust projects. Copy this file to .claude/settings.json in your repo.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.rs$'; then cargo fmt -- $CLAUDE_FILE_PATH 2>&1 || true; fi"
+      },
+      {
+        "matcher": "Write",
+        "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.rs$'; then cargo clippy 2>&1 || true; fi"
+      }
+    ]
+  }
+}

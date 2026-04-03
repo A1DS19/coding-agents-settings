@@ -9,6 +9,7 @@ This folder contains Claude-specific agent configuration assets.
 - `settings/` — settings.json schema reference and example config ([docs](settings/README.md))
 - `claude-md/` — CLAUDE.md templates for global and per-project use ([docs](claude-md/README.md))
 - `scripts/install.sh` — install everything from this repo into `~/.claude/`
+- `scripts/export.sh` — capture local `~/.claude/` changes back into this repo
 
 ## Agents
 
@@ -55,7 +56,7 @@ Hooks are shell commands that run automatically before/after tool calls. Use the
 }
 ```
 
-See [hooks/README.md](hooks/README.md) for events, matchers, environment variables, and [examples.json](hooks/examples.json) for copy-paste configurations.
+See [hooks/README.md](hooks/README.md) for events, matchers, environment variables, and [examples.json](hooks/examples.json) for copy-paste configurations. Ready-to-use per-project templates are in [hooks/templates/](hooks/templates/) (JavaScript, Python, Go, Rust).
 
 ## Settings
 
@@ -80,3 +81,13 @@ Run from repo root to install everything into `~/.claude/`:
 ```
 
 This copies agents, settings.json, and CLAUDE.md from this repo into your local Claude config. The repo is the single source of truth — edit configs here, then re-run the script to apply.
+
+## Export
+
+Capture local changes back into the repo:
+
+```bash
+./claude/scripts/export.sh
+```
+
+Useful when you've experimented with agents or settings locally and want to save them. Review with `git diff` before committing.

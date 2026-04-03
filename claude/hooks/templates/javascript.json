@@ -1,0 +1,15 @@
+{
+  "_comment": "Per-project hooks for JavaScript/TypeScript projects. Copy this file to .claude/settings.json in your repo.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "command": "npx eslint --fix $CLAUDE_FILE_PATH 2>&1 || true"
+      },
+      {
+        "matcher": "Write",
+        "command": "npx prettier --write $CLAUDE_FILE_PATH 2>&1 || true"
+      }
+    ]
+  }
+}
