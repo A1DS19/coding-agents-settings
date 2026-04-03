@@ -1,0 +1,16 @@
+# Codex skills manifest
+# Generated: 2026-04-03T21:13:22Z
+# Source: /home/dev/.codex/skills
+
+./code-review/SKILL.md
+./debug/SKILL.md
+./dependency-audit/SKILL.md
+./grill-me/SKILL.md
+./improve-architecture/SKILL.md
+./incident-response/SKILL.md
+./onboard/SKILL.md
+./pr-create/SKILL.md
+./refactor/SKILL.md
+./release-notes/SKILL.md
+./security-audit/SKILL.md
+./write-tests/SKILL.md
