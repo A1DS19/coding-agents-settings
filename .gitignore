@@ -1,0 +1,12 @@
+# Common temp/editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs and transient outputs
+*.log
+*.tmp
+
+# Optional local-only overrides
+*.local
