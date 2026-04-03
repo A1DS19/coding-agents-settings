@@ -4,11 +4,11 @@
     "PostToolUse": [
       {
         "matcher": "Edit",
-        "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.rs$'; then cargo fmt -- $CLAUDE_FILE_PATH 2>&1 || true; fi"
+        "hooks": [{"type": "command", "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.rs$'; then cargo fmt -- $CLAUDE_FILE_PATH 2>&1 || true; fi"}]
       },
       {
         "matcher": "Write",
-        "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.rs$'; then cargo clippy 2>&1 || true; fi"
+        "hooks": [{"type": "command", "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.rs$'; then cargo clippy 2>&1 || true; fi"}]
       }
     ]
   }

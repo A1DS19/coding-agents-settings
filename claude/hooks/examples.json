@@ -8,28 +8,28 @@
       "_description": "Prevent commits and pushes on main/master branch",
       "event": "PreToolUse",
       "matcher": "Bash",
-      "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git (commit|push)' && git branch --show-current | grep -qE '^(main|master)$'; then echo 'Blocked: do not commit directly to main/master' >&2; exit 1; fi"
+      "hooks": [{"type": "command", "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git (commit|push)' && git branch --show-current | grep -qE '^(main|master)$'; then echo 'Blocked: do not commit directly to main/master' >&2; exit 1; fi"}]
     },
 
     "block-force-push": {
       "_description": "Prevent force pushes",
       "event": "PreToolUse",
       "matcher": "Bash",
-      "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git push.*(--force|-f)'; then echo 'Blocked: force push is not allowed' >&2; exit 1; fi"
+      "hooks": [{"type": "command", "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git push.*(--force|-f)'; then echo 'Blocked: force push is not allowed' >&2; exit 1; fi"}]
     },
 
     "block-secret-commits": {
       "_description": "Prevent committing .env or credential files",
       "event": "PreToolUse",
       "matcher": "Bash",
-      "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git add' && echo \"$CLAUDE_TOOL_INPUT\" | grep -qE '(\\.env|credentials|secrets)'; then echo 'Blocked: do not commit secret files' >&2; exit 1; fi"
+      "hooks": [{"type": "command", "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git add' && echo \"$CLAUDE_TOOL_INPUT\" | grep -qE '(\\.env|credentials|secrets)'; then echo 'Blocked: do not commit secret files' >&2; exit 1; fi"}]
     },
 
     "test-reminder": {
       "_description": "Remind to run tests after source file writes",
       "event": "PostToolUse",
       "matcher": "Write",
-      "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.(ts|js|tsx|jsx|py|go|rs|java|rb)$' && ! echo \"$CLAUDE_FILE_PATH\" | grep -qE '(test|spec|_test)'; then echo 'Source file written — tests may need updating'; fi"
+      "hooks": [{"type": "command", "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.(ts|js|tsx|jsx|py|go|rs|java|rb)$' && ! echo \"$CLAUDE_FILE_PATH\" | grep -qE '(test|spec|_test)'; then echo 'Source file written — tests may need updating'; fi"}]
     }
   },
 
@@ -40,35 +40,35 @@
       "_description": "Run ESLint with auto-fix after every file edit (JS/TS projects)",
       "event": "PostToolUse",
       "matcher": "Edit",
-      "command": "npx eslint --fix $CLAUDE_FILE_PATH 2>&1 || true"
+      "hooks": [{"type": "command", "command": "npx eslint --fix $CLAUDE_FILE_PATH 2>&1 || true"}]
     },
 
     "prettier-on-write": {
       "_description": "Run Prettier after file creation or overwrite (JS/TS projects)",
       "event": "PostToolUse",
       "matcher": "Write",
-      "command": "npx prettier --write $CLAUDE_FILE_PATH 2>&1 || true"
+      "hooks": [{"type": "command", "command": "npx prettier --write $CLAUDE_FILE_PATH 2>&1 || true"}]
     },
 
     "ruff-on-edit": {
       "_description": "Run ruff linter after editing Python files",
       "event": "PostToolUse",
       "matcher": "Edit",
-      "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.py$'; then ruff check --fix $CLAUDE_FILE_PATH 2>&1 || true; fi"
+      "hooks": [{"type": "command", "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.py$'; then ruff check --fix $CLAUDE_FILE_PATH 2>&1 || true; fi"}]
     },
 
     "go-vet-on-edit": {
       "_description": "Run go vet after editing Go files",
       "event": "PostToolUse",
       "matcher": "Edit",
-      "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.go$'; then go vet ./... 2>&1 || true; fi"
+      "hooks": [{"type": "command", "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.go$'; then go vet ./... 2>&1 || true; fi"}]
     },
 
     "cargo-check-on-edit": {
       "_description": "Run cargo check after editing Rust files",
       "event": "PostToolUse",
       "matcher": "Edit",
-      "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.rs$'; then cargo check 2>&1 || true; fi"
+      "hooks": [{"type": "command", "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.rs$'; then cargo check 2>&1 || true; fi"}]
     }
   }
 }

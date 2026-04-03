@@ -23,6 +23,16 @@ Always start in plan mode. Think through the approach before making changes. Pre
 - Don't add error handling for scenarios that can't happen
 - Don't create abstractions for one-time operations
 
+## Memory
+
+After completing a feature, bug fix, or significant task, save a project memory documenting:
+- **What** was done (one-line summary)
+- **How** it was implemented (key decisions, patterns used, files changed)
+- **Why** this approach was chosen over alternatives
+- **Gotchas** — anything non-obvious that someone would need to know later
+
+Name the memory file descriptively (e.g., `project_auth_refactor.md`, `project_fix_race_condition.md`). Use type `project`. Skip this for trivial changes (typos, formatting, config tweaks).
+
 ## Communication
 
 - Be concise — lead with the answer, skip the preamble

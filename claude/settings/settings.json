@@ -27,21 +27,41 @@
     "PreToolUse": [
       {
         "matcher": "Bash",
-        "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git (commit|push)' && git branch --show-current | grep -qE '^(main|master)$'; then echo 'Blocked: do not commit directly to main/master' >&2; exit 1; fi"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git (commit|push)' && git branch --show-current | grep -qE '^(main|master)$'; then echo 'Blocked: do not commit directly to main/master' >&2; exit 1; fi"
+          }
+        ]
       },
       {
         "matcher": "Bash",
-        "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git push.*(--force|-f)'; then echo 'Blocked: force push is not allowed' >&2; exit 1; fi"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git push.*(--force|-f)'; then echo 'Blocked: force push is not allowed' >&2; exit 1; fi"
+          }
+        ]
       },
       {
         "matcher": "Bash",
-        "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git add' && echo \"$CLAUDE_TOOL_INPUT\" | grep -qE '(\\.env|credentials|secrets)'; then echo 'Blocked: do not commit secret files' >&2; exit 1; fi"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'git add' && echo \"$CLAUDE_TOOL_INPUT\" | grep -qE '(\\.env|credentials|secrets)'; then echo 'Blocked: do not commit secret files' >&2; exit 1; fi"
+          }
+        ]
       }
     ],
     "PostToolUse": [
       {
         "matcher": "Write",
-        "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.(ts|js|tsx|jsx|py|go|rs|java|rb)$' && ! echo \"$CLAUDE_FILE_PATH\" | grep -qE '(test|spec|_test)'; then echo 'Source file written — tests may need updating'; fi"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.(ts|js|tsx|jsx|py|go|rs|java|rb)$' && ! echo \"$CLAUDE_FILE_PATH\" | grep -qE '(test|spec|_test)'; then echo 'Source file written — tests may need updating'; fi"
+          }
+        ]
       }
     ]
   },

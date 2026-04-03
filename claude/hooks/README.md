@@ -38,7 +38,12 @@ Example: a `PostToolUse` hook with matcher `Edit` only fires after file edits, n
     "<Event>": [
       {
         "matcher": "<ToolName>",
-        "command": "your-shell-command"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "your-shell-command"
+          }
+        ]
       }
     ]
   }
@@ -84,7 +89,7 @@ Add these to a specific repo's `.claude/settings.json`. See [examples.json](exam
     "PostToolUse": [
       {
         "matcher": "Edit",
-        "command": "npx eslint --fix $CLAUDE_FILE_PATH 2>&1 || true"
+        "hooks": [{"type": "command", "command": "npx eslint --fix $CLAUDE_FILE_PATH 2>&1 || true"}]
       }
     ]
   }
@@ -99,7 +104,7 @@ Add these to a specific repo's `.claude/settings.json`. See [examples.json](exam
     "PostToolUse": [
       {
         "matcher": "Edit",
-        "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.py$'; then ruff check --fix $CLAUDE_FILE_PATH 2>&1 || true; fi"
+        "hooks": [{"type": "command", "command": "if echo \"$CLAUDE_FILE_PATH\" | grep -qE '\\.py$'; then ruff check --fix $CLAUDE_FILE_PATH 2>&1 || true; fi"}]
       }
     ]
   }

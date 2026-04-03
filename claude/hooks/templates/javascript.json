@@ -4,11 +4,11 @@
     "PostToolUse": [
       {
         "matcher": "Edit",
-        "command": "npx eslint --fix $CLAUDE_FILE_PATH 2>&1 || true"
+        "hooks": [{"type": "command", "command": "npx eslint --fix $CLAUDE_FILE_PATH 2>&1 || true"}]
       },
       {
         "matcher": "Write",
-        "command": "npx prettier --write $CLAUDE_FILE_PATH 2>&1 || true"
+        "hooks": [{"type": "command", "command": "npx prettier --write $CLAUDE_FILE_PATH 2>&1 || true"}]
       }
     ]
   }

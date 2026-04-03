@@ -50,8 +50,8 @@ Hooks are shell commands that run automatically before/after tool calls. Use the
 ```json
 {
   "hooks": {
-    "PreToolUse": [{ "matcher": "Bash", "command": "..." }],
-    "PostToolUse": [{ "matcher": "Edit", "command": "npx eslint --fix $CLAUDE_FILE_PATH" }]
+    "PreToolUse": [{"matcher": "Bash", "hooks": [{"type": "command", "command": "..."}]}],
+    "PostToolUse": [{"matcher": "Edit", "hooks": [{"type": "command", "command": "..."}]}]
   }
 }
 ```
